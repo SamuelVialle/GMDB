@@ -19,6 +19,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.dam.gmdb.commons.Utils.*;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class SignInActivity extends AppCompatActivity {
 
@@ -98,6 +100,14 @@ public class SignInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in);
 
         initUI();
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser curentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if(curentUser != null){
+            startActivity(new Intent(SignInActivity.this, HomeActivity.class));
+        }
     }
 }
